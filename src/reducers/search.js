@@ -1,8 +1,7 @@
 // @flow
-import { combineReducers } from 'redux';
+import deepcopy from 'deep-copy';
 
-//TODO better way of adding searchType to widgets?
-const searchReducer = (searchState = [], action) => {
+const searchReducer = (searchState = {}, action) => {
 	switch(action.type) {
 		case 'COLLEGE_SEARCH':
 			return mergeData(searchState, action, 'college', 'phrase');
@@ -17,7 +16,7 @@ const searchReducer = (searchState = [], action) => {
 	}
 };
 
-export default searchReducer
+export default searchReducer;
 
 export const getSearchResultsById = (searchState, id) => {
 	if(searchState[id] && searchState[id].searchResults) {
@@ -28,31 +27,26 @@ export const getSearchResultsById = (searchState, id) => {
 };
 
 const updateCollegeAdded = (searchState, collegeId, added) => {
-	const newState = {...searchState};
+	const newState = deepcopy(searchState);
 
-	for (let id of Object.keys(newState)) {
-		const searchComponent = searchState[id];
+	let keys = Object.keys(newState);
+
+	for (let j = 0; j < keys.length; j++) {
+		const searchComponent = newState[keys[j]];
 
 		if(searchComponent.searchType === 'college') {
-			searchComponent.searchResults.forEach(searchResult => {
+			for(let i = 0; i < searchComponent.searchResults.length; i++) {
+				const searchResult = searchComponent.searchResults[i];
+
 				if(searchResult.id === collegeId) {
 					searchResult.added = added;
 				}
-			});
+			}
 		}
 	}
 
 	return newState;
 };
-
-
-//.filter(searchResult => searchResult.id === collegeId)
-//.map(searchResult => {
-//	return {
-//		...searchResult,
-//		added: added
-//	}
-//});
 
 //TODO export to util
 const mergeData = (data, action, searchType, propertyModified) => {
@@ -62,6 +56,6 @@ const mergeData = (data, action, searchType, propertyModified) => {
 			searchType,
 			...data[action.id],
 			[propertyModified]: action[propertyModified],
-		}
+		},
 	};
 };

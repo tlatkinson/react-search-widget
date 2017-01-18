@@ -17,7 +17,6 @@ export const fetchCollegeSearchResults = (id, phrase, limit = 5, offset = 0) => 
 			limit,
 			offset
 		}).then(
-			//TODO should we format search results so they're not bound to api?
 			searchResults => {
 				collegeSearchSuccess(dispatch, id, searchResults);
 			}
@@ -26,7 +25,7 @@ export const fetchCollegeSearchResults = (id, phrase, limit = 5, offset = 0) => 
 };
 
 export const addRemoveCollege = (collegeId, collegeName, addToList) => (dispatch) => {
-	if (addToList) {
+	if (!addToList) {
 		api.addToCollegeList(collegeId)
 			.then(() => {
 				dispatch({
@@ -64,5 +63,13 @@ const collegeSearchSuccess = (dispatch, id, searchResults) => {
 		type: 'COLLEGE_SEARCH_SUCCESS',
 		id,
 		searchResults
+	});
+};
+
+export const inputKeyUp = (property, value) => (dispatch) => {
+	dispatch({
+		type: 'INPUT_KEYUP',
+		property,
+		value,
 	});
 };

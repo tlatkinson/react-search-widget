@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { fetchCollegeSearchResults } from '../../../actions';
 import SearchInput from './../SearchInput';
 
-//TODO this component could go away if we want to assume all searches have the same core event handlers
-
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch, {id}) => ({

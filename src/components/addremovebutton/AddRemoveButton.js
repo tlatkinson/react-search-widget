@@ -1,11 +1,14 @@
 // @flow
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const AddRemoveButton = ({onAddRemoveClick, added, copy}) => {
+let AddRemoveButton = ({onAddRemoveClick, added, copy}) => {
 
 	const onClick = (e) => {
 		e.preventDefault();
+
+		console.log(added);
 
 		onAddRemoveClick();
 
@@ -15,5 +18,7 @@ const AddRemoveButton = ({onAddRemoveClick, added, copy}) => {
 		<a href="#" className={'button ' + added ? 'remove' : 'add'} onClick={onClick}>{copy}</a>
 	)
 };
+
+AddRemoveButton = connect()(AddRemoveButton);
 
 export default AddRemoveButton;

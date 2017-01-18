@@ -13,7 +13,6 @@ export const fetchSearchResults = (url, data) => {
 };
 
 //TODO un-hard code studentId
-//TODO remove hard coded header
 export const addToCollegeList = (collegeId) => {
 	return rp({
 		method: 'POST',
