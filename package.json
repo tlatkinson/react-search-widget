@@ -3,8 +3,7 @@
 	"version": "0.0.0",
 	"description": "React / Redux",
 	"scripts": {
-		"start": "babel-node devServer.js",
-		"postinstall": "./node_modules/.bin/babel-node devServer.js",
+		"start": "./node_modules/.bin/babel-node devServer.js",
 		"lint": "eslint src"
 	},
 	"repository": {
@@ -15,7 +14,6 @@
 	"dependencies": {
 		"babel-polyfill": "^6.3.14",
 		"deep-copy": "^1.2.0",
-		"json-loader": "^0.5.4",
 		"lodash": "^4.11.2",
 		"node-uuid": "^1.4.7",
 		"normalizr": "^2.1.0",
@@ -45,6 +43,7 @@
 		"eslint-plugin-react": "^5.0.1",
 		"express": "^4.13.3",
 		"flow-bin": "^0.37.4",
+		"json-loader": "^0.5.4",
 		"redux-devtools-extension": "^1.0.0",
 		"webpack": "^1.9.11",
 		"webpack-dev-middleware": "^1.2.0"
