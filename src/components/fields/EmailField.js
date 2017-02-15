@@ -1,22 +1,26 @@
 // @flow
 
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import FieldError from './FieldError';
-import {inputKeyUp} from './../../actions';
+import {validate} from './../../actions';
 import {getFieldData} from './../../reducers/input';
+import {required, size, emailValidator} from './../../util/validators';
 import ValidatedInput from './../fields/ValidatedInput';
 
 const mapStateToProps = (state) => {
 	return {
 		fieldName: 'email',
-		errorText: getFieldData(state.inputState, 'email').errorText,
+		errors: getFieldData(state.inputState, 'email').errors,
 	}
 };
 
 const mapDispatchToProps = (dispatch) => ({
 	onKeyUpEvent(fieldName, value) {
-		dispatch(inputKeyUp(fieldName, value));
+		dispatch(validate(fieldName, value, [
+			required,
+			size(5, 10),
+			emailValidator
+		]));
 	},
 });
 

@@ -1,6 +1,6 @@
 // @flow
 
-import * as api from '../api';
+import * as api from '../util/api';
 
 export const fetchCollegeSearchResults = (id, phrase, limit = 5, offset = 0) => (dispatch, getState) => {
 	dispatch({
@@ -23,6 +23,15 @@ export const fetchCollegeSearchResults = (id, phrase, limit = 5, offset = 0) => 
 		)
 	}
 };
+
+const collegeSearchSuccess = (dispatch, id, searchResults) => {
+	dispatch({
+		type: 'COLLEGE_SEARCH_SUCCESS',
+		id,
+		searchResults
+	});
+};
+
 
 export const addRemoveCollege = (collegeId, collegeName, addToList) => (dispatch) => {
 	if (!addToList) {
@@ -58,18 +67,11 @@ export const addRemoveCollege = (collegeId, collegeName, addToList) => (dispatch
 	}
 };
 
-const collegeSearchSuccess = (dispatch, id, searchResults) => {
+export const validate = (property, value, validators) => (dispatch) => {
 	dispatch({
-		type: 'COLLEGE_SEARCH_SUCCESS',
-		id,
-		searchResults
-	});
-};
-
-export const inputKeyUp = (property, value) => (dispatch) => {
-	dispatch({
-		type: 'INPUT_KEYUP',
+		type: 'VALIDATE',
 		property,
 		value,
+		validators,
 	});
 };

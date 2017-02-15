@@ -2,8 +2,8 @@
 
 const inputReducer = (inputState = {}, action) => {
 	switch (action.type) {
-		case 'INPUT_KEYUP':
-				return inputKeyUp(inputState, action.property, action.value);
+		case 'VALIDATE':
+				return updateState(inputState, action.property, action.value, action.validators);
 			break;
 		default:
 			return inputState;
@@ -16,22 +16,24 @@ export const getFieldData = (inputState, property) => {
 	return Object.assign({}, inputState[property]);
 };
 
-const inputKeyUp = (inputState, property, value) => {
+const updateState = (inputState, property, value, validators) => {
 	return {
 		...inputState,
 		[property]: {
 			value,
-			errorText: validate(property, value)
+			errors: validate(value, validators)
 		}
 	}
 };
 
-const validate = (property, value) => {
-	switch(property) {
-		case 'email':
-			return value.indexOf('@') !== -1 ? '' : 'missing @';
-			break;
-		default:
-			return false;
+const validate = (value, validators) => {
+	const errors = [];
+
+	if(validators) {
+		validators.forEach(validator => {
+			errors.push(validator(value));
+		});
 	}
+
+	return errors.reduce((accumulator, current) => accumulator.concat(current), []);
 };

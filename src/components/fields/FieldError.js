@@ -1,12 +1,12 @@
 // @flow
 
-import React, {Component} from 'react';
+import React from 'react';
 
-let FieldError = ({ errorText  }) => {
+const FieldError = ({ errorText }) => {
 	return (
-		<span style={{display: (errorText && errorText.length === 0) ? 'none': 'inline'}}>
-			<b>{errorText && errorText.length === 0 ? '' : errorText}</b>
-		</span>
+		<div className="error">
+			<b>{errorText}</b>
+		</div>
 	)
 };
 
