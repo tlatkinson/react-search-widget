@@ -4,6 +4,8 @@ import rp from 'request-promise';
 
 const HOST = 'http://localhost:8080';
 
+
+
 export const fetchSearchResults = (url, data) => {
 	return rp({
 		uri: HOST + url,

@@ -3,8 +3,7 @@
 const inputReducer = (inputState = {}, action) => {
 	switch (action.type) {
 		case 'VALIDATE':
-				return updateState(inputState, action.property, action.value, action.validators);
-			break;
+			return updateState(inputState, action.property, action.value, action.validators);
 		default:
 			return inputState;
 	}

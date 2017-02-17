@@ -2,6 +2,27 @@
 
 import * as api from '../util/api';
 
+export const fetchMajorSearchResults = (id, phrase, limit = 5, offset = 0) => (dispatch, getState) => {
+	dispatch({
+		type: 'MAJOR_SEARCH',
+		id,
+		phrase,
+	});
+
+	const majors = [{id: 1, title:'Accounting'}, {id:2, title:'Computer Science'}];
+	majorSearchSuccess(dispatch, id, majors);
+};
+
+
+const majorSearchSuccess = (dispatch, id, searchResults) => {
+	dispatch({
+		type: 'MAJOR_SEARCH_SUCCESS',
+		id,
+		searchResults
+	});
+};
+
+
 export const fetchCollegeSearchResults = (id, phrase, limit = 5, offset = 0) => (dispatch, getState) => {
 	dispatch({
 		type: 'COLLEGE_SEARCH',
@@ -31,7 +52,6 @@ const collegeSearchSuccess = (dispatch, id, searchResults) => {
 		searchResults
 	});
 };
-
 
 export const addRemoveCollege = (collegeId, collegeName, addToList) => (dispatch) => {
 	if (!addToList) {

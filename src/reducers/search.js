@@ -11,6 +11,10 @@ const searchReducer = (searchState = {}, action) => {
 			return updateCollegeAdded(searchState, action.collegeId, true);
 		case 'COLLEGE_REMOVED':
 			return updateCollegeAdded(searchState, action.collegeId, false);
+		case 'MAJOR_SEARCH':
+			return mergeData(searchState, action, 'major', 'phrase');
+		case 'MAJOR_SEARCH_SUCCESS':
+			return mergeData(searchState, action, 'major', 'searchResults');
 		default:
 			return searchState;
 	}

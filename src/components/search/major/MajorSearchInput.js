@@ -1,21 +1,19 @@
-// @flow
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCollegeSearchResults } from '../../../actions';
+import { fetchMajorSearchResults } from '../../../actions';
 import SearchInput from './../SearchInput';
 
-const mapStateToProps = (state, {id}) => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch, {id}) => ({
 	onSearchKeyUp(searchInput) {
-		dispatch(fetchCollegeSearchResults(id, searchInput))
-	},
+		dispatch(fetchMajorSearchResults(id, searchInput));
+	}
 });
 
-const CollegeSearchInput = connect(
+const MajorSearchInput = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(SearchInput);
 
-export default CollegeSearchInput;
+export default MajorSearchInput;
